@@ -1,0 +1,31 @@
+spring:
+  application:
+    name: api-gateway
+  #cloud:
+   # gateway:
+    #  routes:
+     # - id: first-service
+      #  uri: lb://FIRST-SERVICE
+       # predicates:
+        #- Path=/api/v1/first/**
+        #filters:
+        #- RewritePath=/api/v1/first/(?<remains>.*), /$\{remains}
+        #- AddRequestHeader=X-first-Header, first-service-header
+
+server:
+  port: 8088
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
+    register-with-eureka: false
+  instance:
+    preferIpAddress: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: hystrix.stream
+
